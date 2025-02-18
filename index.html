@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Coffee Shop</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --primary-color: #006241;
+      --dark-color: #1e3932;
+      --light-bg: #f3f3f3;
+      --nav-bg: rgba(255,255,255,0.95);
+    }
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--light-bg);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding-top: 70px; /* for fixed navbar */
+    }
+    a {
+      text-decoration: none;
+    }
+    /* Keyframes for fadeInUp animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(90deg, var(--nav-bg) 0%, rgba(245,245,245,0.95) 100%);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: background 0.3s ease-in-out;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 0.5rem 1rem;
+    }
+    .navbar-brand img {
+      max-height: 40px;
+    }
+    .navbar .nav-link {
+      font-weight: 500;
+      transition: color 0.3s;
+      color: #333;
+      margin: 0 0.5rem;
+    }
+    .navbar .nav-link:hover {
+      color: var(--primary-color);
+    }
+    /* Hero Section */
+    .hero {
+      background: url('https://source.unsplash.com/1600x900/?coffee,shop') no-repeat center center/cover;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+    }
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      font-size: 3rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    .hero h3 {
+      position: relative;
+      z-index: 1;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #fff;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.2s;
+      opacity: 0;
+    }
+    .hero h2 {
+      position: relative;
+      z-index: 1;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.3s;
+      opacity: 0;
+    }
+    .btn-custom {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
+      border: 2px solid transparent;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.6s;
+      opacity: 0;
+    }
+    .btn-custom:hover {
+      background: #fff;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      transform: translateY(-3px) scale(1.05);
+    }
+    /* Product Section */
+    .product-section {
+      background: url('https://source.unsplash.com/1600x900/?coffee') no-repeat center center/cover;
+      position: relative;
+      padding: 4rem 0;
+    }
+    .product-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 0;
+    }
+    .product-content {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    .product-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    /* Product Cards */
+    .product-cards {
+      z-index: 1;
+      position: relative;
+    }
+    .product-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      height: 480px; /* Fixed height for uniform cards */
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card.in-view {
+      animation: fadeInUp 0.8s forwards;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      object-position: center;
+      background: #fff;
+    }
+    .product-card .card-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+    .product-card .card-title {
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+    .product-card .card-text {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .bottom-content {
+      margin-top: auto;
+    }
+    .rating {
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+    .rating i {
+      margin-right: 2px;
+    }
+    /* Testimonial Section */
+    .testimonial-section {
+      background: var(--light-bg);
+      padding: 4rem 0;
+    }
+    .testimonial-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--dark-color);
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    .testimonial-card {
+      border: none;
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: transform 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+      height: 340px; /* Fixed height for uniform testimonial cards */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .testimonial-card.in-view {
+      animation: fadeInUp 0.8s forwards;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+    }
+    .testimonial-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin: 0 auto 1rem auto;
+    }
+    .testimonial-card .card-text {
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+    .testimonial-card .card-title {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .testimonial-rating {
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+    .testimonial-rating i {
+      margin-right: 2px;
+    }
+    /* Featured Offer Section */
+    .offer-section {
+      background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
+      color: #fff;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    .offer-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .offer-section p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    #countdown {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    #countdown .time-box {
+      background: #fff;
+      color: var(--primary-color);
+      border-radius: 10px;
+      padding: 1rem;
+      width: 80px;
+    }
+    #countdown .time-box span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: block;
+    }
+    #countdown .time-box small {
+      font-size: 0.8rem;
+    }
+    /* Newsletter Section */
+    .newsletter-section {
+      background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
+      color: #fff;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    .newsletter-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    .newsletter-section p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.3s;
+      opacity: 0;
+    }
+    .newsletter-section form {
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.6s;
+      opacity: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .newsletter-section form input {
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 30px;
+      max-width: 400px;
+      margin-right: 1rem;
+      flex: 1 0 auto;
+    }
+    .newsletter-section form input:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    .newsletter-section form button {
+      background: #fff;
+      color: var(--primary-color);
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
+      margin-top: 0.5rem;
+    }
+    .newsletter-section form button:hover {
+      background: var(--primary-color);
+      color: #fff;
+      transform: translateY(-3px) scale(1.05);
+    }
+    /* Map Section */
+    .map-section {
+      padding: 4rem 0;
+    }
+    .map-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--dark-color);
+    }
+    .map-container {
+      width: 100%;
+      height: 450px;
+      border: 0;
+    }
+    /* Footer */
+    footer {
+      background: #222;
+      color: #fff;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    footer .social-icons a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 24px;
+      transition: transform 0.3s, color 0.3s;
+    }
+    footer .social-icons a:hover {
+      color: var(--primary-color);
+      transform: scale(1.2);
+    }
+    footer .footer-links a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    footer .footer-links a:hover {
+      color: var(--primary-color);
+    }
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero h2 {
+        font-size: 1.2rem;
+      }
+      .product-card img {
+        height: 200px;
+      }
+      .product-card {
+        height: auto;
+      }
+      .newsletter-section form {
+        flex-direction: column;
+      }
+      .newsletter-section form input {
+        margin: 0 0 1rem 0;
+        width: 100%;
+      }
+    }
+    @media (max-width: 992px) and (min-width: 577px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .hero h2 {
+        font-size: 1.4rem;
+      }
+      .product-card {
+        height: 460px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="https://upload.wikimedia.org/wikipedia/id/d/d3/Starbucks_Corporation_Logo_2011.svg" alt="Logo" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="rewards.html">Rewards</a></li>
+          <li class="nav-item"><a class="nav-link" href="gift_card.html">Gift Cards</a></li>
+          <li class="nav-item"><a class="nav-link" href="kontak.html">contact Starbucks</a></li>
+          <li class="nav-item"><a class="nav-link" href="store.html">Stores</a></li>
+          <li class="nav-item"><a class="btn btn-custom" href="#">Sign In</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Experience the Best Coffee</h1>
+    <h3>Good Coffee, Good Moods</h3>
+    <h2>Indulge in the Perfect Brew</h2>
+    <a href="#" class="btn btn-custom">Explore Our Menu</a>
+  </section>
+
+  <!-- Product Section -->
+  <section class="product-section">
+    <div class="container">
+      <div class="product-content">
+        <h2>Our Coffee Selection</h2>
+      </div>
+      <div class="row product-cards">
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card product-card">
+            <img src="asset/images (1).jpeg" alt="Caffè Latte">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Caffè Latte</h5>
+              <p class="card-text">Rich, creamy, and perfect for any time of the day.</p>
+              <div class="bottom-content mt-auto">
+                <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <a href="#" class="btn btn-custom btn-buy mt-2">Buy Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card product-card">
+            <img src="asset/df9db9e10bc628b7ea8afb89bdd87314.jpg" alt="Espresso">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Espresso</h5>
+              <p class="card-text">Bold and intense, a classic choice for coffee lovers.</p>
+              <div class="bottom-content mt-auto">
+                <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <a href="#" class="btn btn-custom btn-buy mt-2">Buy Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card product-card">
+            <img src="asset/Copycat-Starbucks-Caramel-Frappaccino-thumbnail.png" alt="Cappuccino">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Cappuccino</h5>
+              <p class="card-text">Light, frothy, and delightfully aromatic.</p>
+              <div class="bottom-content mt-auto">
+                <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <a href="#" class="btn btn-custom btn-buy mt-2">Buy Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section class="testimonial-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2>What Our Customers Say</h2>
+        <p>Our customers love our coffee and service.</p>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card testimonial-card">
+            <div class="card-body text-center">
+              <img src="https://static.promediateknologi.id/crop/0x73:1800x1333/0x0/webp/photo/p2/242/2024/12/30/Elon-Musk-3408557477.jpeg" alt="Customer 1" class="rounded-circle mb-3" />
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <p class="card-text">"Amazing coffee and wonderful service!"</p>
+              <h6 class="card-title">Elon Musk</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card testimonial-card">
+            <div class="card-body text-center">
+              <img src="data:image/jpeg;base64,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" alt="Customer 2" class="rounded-circle mb-3" />
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <p class="card-text">"A perfect blend of flavor and ambiance."</p>
+              <h6 class="card-title">Mia Khalifa</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card testimonial-card">
+            <div class="card-body text-center">
+              <img src="https://asset.kompas.com/crops/GQUver5Id7jVYzbXgJveT7OJ0qg=/65x0:650x390/1200x800/data/photo/2015/10/27/1658302Mark-Jadi780x390.jpg" alt="Customer 3" class="rounded-circle mb-3" />
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <p class="card-text">"I visit here every week. Highly recommended!"</p>
+              <h6 class="card-title">Mark zuckerberg</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Offer Section -->
+  <section class="offer-section">
+    <div class="container">
+      <h2>Special Offer: 20% Off Your First Order</h2>
+      <p>Hurry up! Offer ends in:</p>
+      <div id="countdown" class="d-flex justify-content-center gap-3">
+        <div class="time-box">
+          <span id="days">00</span>
+          <small>Days</small>
+        </div>
+        <div class="time-box">
+          <span id="hours">00</span>
+          <small>Hours</small>
+        </div>
+        <div class="time-box">
+          <span id="minutes">00</span>
+          <small>Minutes</small>
+        </div>
+        <div class="time-box">
+          <span id="seconds">00</span>
+          <small>Seconds</small>
+        </div>
+      </div>
+      <a href="#" class="btn btn-custom mt-4">Order Now</a>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <h2>Subscribe to Our Newsletter</h2>
+      <p>Get the latest updates and offers delivered to your inbox.</p>
+      <form class="d-flex justify-content-center mt-4">
+        <input type="email" class="form-control" placeholder="Enter your email" required />
+        <button type="submit" class="btn btn-custom ms-2">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <div class="container">
+      <h2>Our Location</h2>
+      <div class="map-container">
+        <iframe class="map-container" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1980.4756649201505!2d106.81236441529394!3d-6.203295399999992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3a80d4b3a1b%3A0x57cf8b7e0a3b967!2sStarbucks!5e0!3m2!1sen!2sid!4v1615292345678!5m2!1sen!2sid" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="container">
+      <div class="social-icons mb-3">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+      <div class="footer-links mb-2">
+        <a href="#">Privacy Policy</a> |
+        <a href="#">Terms of Service</a> |
+        <a href="#">Contact Us</a>
+      </div>
+      <p>&copy; 2023 Modern Coffee Shop. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Intersection Observer for animating elements on scroll
+    document.addEventListener("DOMContentLoaded", function() {
+      const animatedElements = document.querySelectorAll(
+        '.product-card, .product-content, .testimonial-card, .testimonial-section h2, .testimonial-section p, .newsletter-section h2, .newsletter-section p, .newsletter-section form'
+      );
+      const observerOptions = {
+        threshold: 0.2
+      };
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      animatedElements.forEach(el => {
+        observer.observe(el);
+      });
+    });
+    
+    // Countdown Timer for Offer Section
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 7);
+    
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate.getTime() - now;
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById("days").textContent = days < 10 ? "0" + days : days;
+      document.getElementById("hours").textContent = hours < 10 ? "0" + hours : hours;
+      document.getElementById("minutes").textContent = minutes < 10 ? "0" + minutes : minutes;
+      document.getElementById("seconds").textContent = seconds < 10 ? "0" + seconds : seconds;
+      
+      if (distance < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("countdown").innerHTML = "EXPIRED";
+      }
+    }
+    
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    
+    // Parallax animation using requestAnimationFrame for Hero and Product Section backgrounds
+    let latestScrollY = 0;
+    let ticking = false;
+    function onScroll() {
+      latestScrollY = window.scrollY;
+      requestTick();
+    }
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+      }
+      ticking = true;
+    }
+    function updateParallax() {
+      const hero = document.querySelector('.hero');
+      const productSection = document.querySelector('.product-section');
+      if(hero) {
+        hero.style.backgroundPositionY = (latestScrollY * 0.5) + "px";
+      }
+      if(productSection) {
+        productSection.style.backgroundPositionY = (latestScrollY * 0.3) + "px";
+      }
+      ticking = false;
+    }
+    window.addEventListener('scroll', onScroll, false);
+  </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<div class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">&#10006;</button>
+    <h2 class="text-white text-center">Menu</h2>
+    <a href="#">Beranda</a>
+    <a href="#features">Fitur</a>
+    <a href="#testimonials">Testimoni</a>
+    <a href="#pricing">Harga</a>
+    <a href="#" class="btn btn-primary m-3 d-block">Beli Sekarang</a>
+</div>
+<button class="open-btn" onclick="toggleSidebar()">&#9776;</button>
+<style>
+    /* Sidebar Styling */
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #343a40;
+    padding-top: 20px;
+    transition: left 0.3s ease-in-out;
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: #495057;
+}
+
+/* Tombol Buka & Tutup Sidebar */
+.open-btn {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    font-size: 24px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+</style>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starbucks Gift Card</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    /* Atur box-sizing untuk semua elemen */
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Pastikan html dan body menempati minimal tinggi viewport */
+    html,
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      overflow-y: auto;
+    }
+
+    /* Background animasi dengan tema Starbucks */
+    body {
+      background: linear-gradient(45deg, rgb(0,112,74), rgb(0,86,52), rgb(255,255,255));
+      background-size: 200% 200%;
+      animation: gradientAnimation 15s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Container untuk semua card */
+    .cards-container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 20px;
+    }
+
+    /* Styling untuk gift card */
+    .gift-card {
+      position: relative;
+      background: #fff;
+      color: #000;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 0.2s ease-out;
+      margin-bottom: 30px;
+    }
+
+    /* Animasi masuk secara bertahap */
+    .gift-card.animate-enter {
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Efek Shine ala After Effects pada hover */
+    .gift-card::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+      transform: translateX(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .gift-card:hover::after {
+      animation: shine 1s ease-in-out forwards;
+    }
+    @keyframes shine {
+      0% { transform: translateX(-100%); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateX(100%); opacity: 0; }
+    }
+
+    /* Header styling */
+    .gift-card-header {
+      background: #00704a;
+      padding: 20px;
+      text-align: center;
+    }
+    .gift-card-header h2 {
+      margin: 0;
+      color: #fff;
+      font-size: 1.25rem;
+      text-shadow: 2px 2px 8px rgba(255,255,255,0.8);
+    }
+
+    /* Body styling */
+    .gift-card-body {
+      padding: 20px;
+      text-align: center;
+    }
+    .gift-card-body img {
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 100px;
+      margin-bottom: 15px;
+    }
+    .gift-card-body p {
+      margin-bottom: 15px;
+    }
+
+    /* Footer styling */
+    .gift-card-footer {
+      background: #f8f9fa;
+      padding: 15px;
+      text-align: center;
+    }
+    .btn-redeem {
+      background: #00704a;
+      color: #fff;
+      border: none;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+    .btn-redeem:hover {
+      background: #005634;
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="cards-container container">
+    <div class="row g-4">
+      <!-- Gift Card 1 -->
+      <div class="col-sm-12 col-md-4">
+        <div class="gift-card" id="giftCard1">
+          <div class="gift-card-header">
+            <h2>Starbucks Gift Card</h2>
+          </div>
+          <div class="gift-card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="Starbucks Logo" />
+            <p>Selamat menikmati kopi favoritmu!</p>
+            <p>Voucher senilai: <strong>Rp. 100.000</strong></p>
+          </div>
+          <div class="gift-card-footer">
+            <button class="btn btn-redeem">Tukarkan Sekarang</button>
+          </div>
+        </div>
+      </div>
+      <!-- Gift Card 2 -->
+      <div class="col-sm-12 col-md-4">
+        <div class="gift-card" id="giftCard2">
+          <div class="gift-card-header">
+            <h2>Starbucks Gift Card</h2>
+          </div>
+          <div class="gift-card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="Starbucks Logo" />
+            <p>Rasakan kenikmatan kopi premium!</p>
+            <p>Voucher senilai: <strong>Rp. 200.000</strong></p>
+          </div>
+          <div class="gift-card-footer">
+            <button class="btn btn-redeem">Tukarkan Sekarang</button>
+          </div>
+        </div>
+      </div>
+      <!-- Gift Card 3 -->
+      <div class="col-sm-12 col-md-4">
+        <div class="gift-card" id="giftCard3">
+          <div class="gift-card-header">
+            <h2>Starbucks Gift Card</h2>
+          </div>
+          <div class="gift-card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="Starbucks Logo" />
+            <p>Nikmati momen santai bersama kopi!</p>
+            <p>Voucher senilai: <strong>Rp. 150.000</strong></p>
+          </div>
+          <div class="gift-card-footer">
+            <button class="btn btn-redeem">Tukarkan Sekarang</button>
+          </div>
+        </div>
+      </div>
+      <!-- Gift Card 4 -->
+      <div class="col-sm-12 col-md-4">
+        <div class="gift-card" id="giftCard4">
+          <div class="gift-card-header">
+            <h2>Starbucks Gift Card</h2>
+          </div>
+          <div class="gift-card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="Starbucks Logo" />
+            <p>Waktunya menikmati kopi spesial!</p>
+            <p>Voucher senilai: <strong>Rp. 250.000</strong></p>
+          </div>
+          <div class="gift-card-footer">
+            <button class="btn btn-redeem">Tukarkan Sekarang</button>
+          </div>
+        </div>
+      </div>
+      <!-- Gift Card 5 -->
+      <div class="col-sm-12 col-md-4">
+        <div class="gift-card" id="giftCard5">
+          <div class="gift-card-header">
+            <h2>Starbucks Gift Card</h2>
+          </div>
+          <div class="gift-card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="Starbucks Logo" />
+            <p>Bonus eksklusif untuk member setia!</p>
+            <p>Voucher senilai: <strong>Rp. 300.000</strong></p>
+          </div>
+          <div class="gift-card-footer">
+            <button class="btn btn-redeem">Tukarkan Sekarang</button>
+          </div>
+        </div>
+      </div>
+      <!-- Gift Card 6 -->
+      <div class="col-sm-12 col-md-4">
+        <div class="gift-card" id="giftCard6">
+          <div class="gift-card-header">
+            <h2>Starbucks Gift Card</h2>
+          </div>
+          <div class="gift-card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="Starbucks Logo" />
+            <p>Kejutan spesial untuk hari ini!</p>
+            <p>Voucher senilai: <strong>Rp. 50.000</strong></p>
+          </div>
+          <div class="gift-card-footer">
+            <button class="btn btn-redeem">Tukarkan Sekarang</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (termasuk Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const giftCards = document.querySelectorAll(".gift-card");
+      
+      // Animasi masuk secara bergantian
+      giftCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add("animate-enter");
+        }, 300 + index * 100);
+      });
+
+      // Efek 3D untuk setiap gift card
+      giftCards.forEach((card) => {
+        card.addEventListener("mousemove", function (e) {
+          const rect = card.getBoundingClientRect();
+          const cardWidth = rect.width;
+          const cardHeight = rect.height;
+          const centerX = rect.left + cardWidth / 2;
+          const centerY = rect.top + cardHeight / 2;
+          const mouseX = e.clientX;
+          const mouseY = e.clientY;
+          const rotateX = ((mouseY - centerY) / cardHeight) * 15;
+          const rotateY = ((mouseX - centerX) / cardWidth) * -15;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
+        card.addEventListener("mouseleave", function () {
+          card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+        });
+      });
+    });
+  </script>
+</body>
+</html>

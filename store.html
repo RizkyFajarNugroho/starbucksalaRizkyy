@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starbucks Stores</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    /* Pastikan html dan body menempati seluruh tinggi viewport */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Background animasi RGB dengan tema Starbucks */
+    body {
+      /* Warna khas Starbucks:
+         - rgb(0,112,74): hijau primer
+         - rgb(0,86,52): hijau gelap
+         - rgb(255,255,255): putih sebagai aksen */
+      background: linear-gradient(45deg, rgb(0,112,74), rgb(0,86,52), rgb(255,255,255));
+      background-size: 200% 200%;
+      animation: gradientAnimation 15s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Container utama untuk daftar stores */
+    .stores-container {
+      max-width: 1000px;
+      width: 90%;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out forwards;
+      animation-delay: 0.3s;
+      perspective: 1000px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header */
+    .stores-header {
+      text-align: center;
+      background: #00704a;
+      padding: 20px;
+      border-radius: 10px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    /* Bar pencarian */
+    .search-bar {
+      margin-top: 15px;
+    }
+
+    /* Styling untuk masing-masing store card */
+    .store-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      margin-bottom: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+
+    .store-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .store-details {
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    .store-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #00704a;
+    }
+
+    .store-address {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .btn-map {
+      background: #00704a;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+
+    .btn-map:hover {
+      background: #005634;
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="stores-container" id="storesContainer">
+    <div class="stores-header">
+      <h2>Temukan Starbucks Terdekat</h2>
+      <p>Temukan lokasi Starbucks favorit Anda!</p>
+      <!-- Bar pencarian -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchBar"
+          class="form-control"
+          placeholder="Cari alamat atau kota..."
+        />
+      </div>
+    </div>
+    <div class="stores-list" id="storesList">
+      <!-- Store Card 1 -->
+      <div class="store-card">
+        <div class="store-details">
+          <div class="store-title">Starbucks Jakarta</div>
+          <div class="store-address">Jl. Sudirman No. 1, Jakarta</div>
+        </div>
+        <button class="btn btn-map">Lihat di Peta</button>
+      </div>
+      <!-- Store Card 2 -->
+      <div class="store-card">
+        <div class="store-details">
+          <div class="store-title">Starbucks Bandung</div>
+          <div class="store-address">Jl. Dago No. 45, Bandung</div>
+        </div>
+        <button class="btn btn-map">Lihat di Peta</button>
+      </div>
+      <!-- Store Card 3 -->
+      <div class="store-card">
+        <div class="store-details">
+          <div class="store-title">Starbucks Surabaya</div>
+          <div class="store-address">Jl. Pemuda No. 10, Surabaya</div>
+        </div>
+        <button class="btn btn-map">Lihat di Peta</button>
+      </div>
+      <!-- Store Card 4 -->
+      <div class="store-card">
+        <div class="store-details">
+          <div class="store-title">Starbucks Bali</div>
+          <div class="store-address">Jl. Sunset Road, Kuta, Bali</div>
+        </div>
+        <button class="btn btn-map">Lihat di Peta</button>
+      </div>
+      <div class="store-card">
+        <div class="store-details">
+          <div class="store-title">Starbucks Solo</div>
+          <div class="store-address">Jl. Yos Sudarso, Solo</div>
+        </div>
+        <button class="btn btn-map">Lihat di Peta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (termasuk Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Efek 3D untuk container stores berdasarkan pergerakan kursor
+    const storesContainer = document.getElementById("storesContainer");
+
+    storesContainer.addEventListener("mousemove", function (e) {
+      const rect = storesContainer.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      // Hitung rotasi berdasarkan posisi kursor
+      const rotateX = ((mouseY - centerY) / rect.height) * 10;
+      const rotateY = ((mouseX - centerX) / rect.width) * -10;
+      storesContainer.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+
+    storesContainer.addEventListener("mouseleave", function () {
+      storesContainer.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+    });
+
+    // Fitur pencarian untuk memfilter store berdasarkan judul atau alamat
+    const searchBar = document.getElementById("searchBar");
+    const storeCards = document.querySelectorAll(".store-card");
+
+    searchBar.addEventListener("input", function (e) {
+      const query = e.target.value.toLowerCase();
+      storeCards.forEach((card) => {
+        const title = card.querySelector(".store-title").textContent.toLowerCase();
+        const address = card.querySelector(".store-address").textContent.toLowerCase();
+        if (title.includes(query) || address.includes(query)) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

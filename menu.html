@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu Starbucks - Profesional</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <!-- Google Fonts: Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Global Styles */
+    body {
+      background-color: rgb(210, 220, 210); /* #d2dcd2 */
+      color: #333;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #00704A;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+    /* Styling Input Pencarian */
+    .form-control {
+      border: 2px solid #00704A;
+      border-radius: 25px;
+    }
+    .form-control:focus {
+      box-shadow: 0 0 5px rgba(0,112,74,0.5);
+      border-color: #00704A;
+    }
+    /* Card Container */
+    .menu-item {
+      margin-bottom: 30px;
+      perspective: 1000px;
+    }
+    /* Keyframes untuk animasi kedatangan */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Style Card untuk Tampilan Profesional */
+    .menu-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.4s, box-shadow 0.4s;
+      animation: slideIn 0.5s ease-out forwards;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    /* Staggered Animation Delay */
+    .menu-item:nth-child(1) .menu-card { animation-delay: 0.1s; }
+    .menu-item:nth-child(2) .menu-card { animation-delay: 0.2s; }
+    .menu-item:nth-child(3) .menu-card { animation-delay: 0.3s; }
+    .menu-item:nth-child(4) .menu-card { animation-delay: 0.4s; }
+    .menu-item:nth-child(5) .menu-card { animation-delay: 0.5s; }
+    .menu-item:nth-child(6) .menu-card { animation-delay: 0.6s; }
+    /* Efek Hover: Subtle Transform dan Shadow */
+    .menu-card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 10px 20px rgba(0, 112, 74, 0.2);
+    }
+    /* Gambar Card */
+    .menu-img {
+      height: 200px;
+      object-fit: contain; /* Menampilkan gambar secara utuh */
+      width: 100%;
+    }
+    /* Card Body: Menggunakan Flex agar ukuran semua card sama */
+    .card-body {
+      flex: 1 1 auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: #00704A;
+      font-weight: 700;
+    }
+    .card-text {
+      flex: 1 1 auto;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+    /* Tombol Buy Now */
+    .btn-primary {
+      background-color: #00704A;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 20px;
+      font-weight: 700;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: #005f3a;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+    <h1>Menu Starbucks</h1>
+    <!-- Input Pencarian -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-6">
+        <input type="text" id="searchInput" class="form-control" placeholder="Cari menu..." />
+      </div>
+    </div>
+    <!-- Daftar Menu -->
+    <div class="row" id="menuContainer">
+      <!-- Card 1 -->
+      <div class="col-md-4 menu-item">
+        <div class="card menu-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD35t5CWY0BAEvb-XP1uWpSDHl9F4F0ghkAw&s" class="menu-img" alt="Caffè Latte" />
+          <div class="card-body">
+            <h5 class="card-title">Caffè Latte</h5>
+            <p class="card-text">Espresso dengan susu panas dan lapisan busa tipis.</p>
+            <button class="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="col-md-4 menu-item">
+        <div class="card menu-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfKuuZYj6wQWeVzVl6U8kIHSRuubSS5th9jQ&s" class="menu-img" alt="Espresso" />
+          <div class="card-body">
+            <h5 class="card-title">Espresso</h5>
+            <p class="card-text">Espresso pekat dengan cita rasa yang kuat.</p>
+            <button class="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="col-md-4 menu-item">
+        <div class="card menu-card">
+          <img src="https://bunny-wp-pullzone-8lgzf5kyx3.b-cdn.net/assets/uploads/2023/08/sbx20190617-33379-cappuccino-onwhite-corelib-srgb.png" class="menu-img" alt="Cappuccino" />
+          <div class="card-body">
+            <h5 class="card-title">Cappuccino</h5>
+            <p class="card-text">Perpaduan espresso, susu panas, dan busa yang seimbang.</p>
+            <button class="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="col-md-4 menu-item">
+        <div class="card menu-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp1Z_YAove2drf0ZAHtTOFUWtY4upkysFqig&s" class="menu-img" alt="Americano" />
+          <div class="card-body">
+            <h5 class="card-title">Americano</h5>
+            <p class="card-text">Espresso yang diencerkan dengan air panas untuk cita rasa lebih ringan.</p>
+            <button class="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="col-md-4 menu-item">
+        <div class="card menu-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdkdUGDKk2ZUutFru6Dv6_rWyr-wHQgqK14g&s" class="menu-img" alt="Mocha" />
+          <div class="card-body">
+            <h5 class="card-title">Mocha</h5>
+            <p class="card-text">Espresso dengan cokelat, susu panas, dan krim kocok di atasnya.</p>
+            <button class="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="col-md-4 menu-item">
+        <div class="card menu-card">
+          <img src="https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/ed979784-5192-446f-a2a8-c0766936181e_a94ca58b-e5cc-426a-8791-5b6586a47ef1_master-menu-item-image_1587798930575.jpg" class="menu-img" alt="Caramel Macchiato" />
+          <div class="card-body">
+            <h5 class="card-title">Caramel Macchiato</h5>
+            <p class="card-text">Susunan susu panas dengan vanila, espresso, dan caramel di atasnya.</p>
+            <button class="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS, Popper.js, dan jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Fitur pencarian menu
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+      const searchValue = this.value.toLowerCase();
+      const menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach(function(item) {
+        const title = item.querySelector('.card-title').textContent.toLowerCase();
+        item.style.display = title.indexOf(searchValue) > -1 ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

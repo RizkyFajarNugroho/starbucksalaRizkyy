@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starbucks Rewards</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    /* Pastikan html dan body menempati seluruh tinggi viewport */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Background animasi RGB dengan tema Starbucks */
+    body {
+      /* Warna khas Starbucks:
+         - rgb(0,112,74): hijau primer
+         - rgb(0,86,52): hijau gelap
+         - rgb(255,255,255): putih sebagai aksen */
+      background: linear-gradient(45deg, rgb(0,112,74), rgb(0,86,52), rgb(255,255,255));
+      background-size: 200% 200%;
+      animation: gradientAnimation 15s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Container utama rewards */
+    .rewards-container {
+      max-width: 800px;
+      width: 90%;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out forwards;
+      animation-delay: 0.3s;
+      transition: transform 0.2s ease-out;
+      perspective: 1000px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .rewards-header {
+      text-align: center;
+      background: #00704a;
+      padding: 20px;
+      border-radius: 10px;
+      color: #fff;
+    }
+
+    .rewards-content {
+      margin-top: 20px;
+    }
+
+    /* Styling untuk masing-masing reward card */
+    .reward-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      margin-bottom: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+
+    .reward-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .reward-details {
+      flex: 1;
+    }
+
+    .reward-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #00704a;
+    }
+
+    .reward-description {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .btn-redeem {
+      background: #00704a;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+
+    .btn-redeem:hover {
+      background: #005634;
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="rewards-container" id="rewardsContainer">
+    <div class="rewards-header">
+      <h2>Starbucks Rewards</h2>
+      <p>Kumpulkan poin dan dapatkan hadiah menarik!</p>
+    </div>
+    <div class="rewards-content">
+      <!-- Reward Card 1 -->
+      <div class="reward-card">
+        <div class="reward-details">
+          <div class="reward-title">Gratis Minuman Besar</div>
+          <div class="reward-description">
+            Dapatkan minuman besar gratis setelah mengumpulkan 150 poin.
+          </div>
+        </div>
+        <button class="btn btn-redeem">Tukar</button>
+      </div>
+      <!-- Reward Card 2 -->
+      <div class="reward-card">
+        <div class="reward-details">
+          <div class="reward-title">Diskon 50%</div>
+          <div class="reward-description">
+            Nikmati diskon 50% untuk pembelian kopi berikutnya dengan 100 poin.
+          </div>
+        </div>
+        <button class="btn btn-redeem">Tukar</button>
+      </div>
+      <!-- Reward Card 3 -->
+      <div class="reward-card">
+        <div class="reward-details">
+          <div class="reward-title">Camilan Gratis</div>
+          <div class="reward-description">
+            Dapatkan camilan gratis dengan mengumpulkan 120 poin.
+          </div>
+        </div>
+        <button class="btn btn-redeem">Tukar</button>
+      </div>
+      <!-- Reward Card 4 -->
+      <div class="reward-card">
+        <div class="reward-details">
+          <div class="reward-title">Voucher Diskon Rp50.000</div>
+          <div class="reward-description">
+            Gunakan voucher untuk potongan harga Rp50.000 dengan 200 poin.
+          </div>
+        </div>
+        <button class="btn btn-redeem">Tukar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (termasuk Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Efek 3D untuk container rewards berdasarkan pergerakan kursor
+    const rewardsContainer = document.getElementById("rewardsContainer");
+
+    rewardsContainer.addEventListener("mousemove", function (e) {
+      const rect = rewardsContainer.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      const rotateX = ((mouseY - centerY) / rect.height) * 10;
+      const rotateY = ((mouseX - centerX) / rect.width) * -10;
+      rewardsContainer.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+
+    rewardsContainer.addEventListener("mouseleave", function () {
+      rewardsContainer.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+    });
+  </script>
+</body>
+</html>
